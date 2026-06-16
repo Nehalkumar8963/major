@@ -90,7 +90,7 @@ app.use((req, res, next) => {
 });
 
 app.get('/', (req, res) => {
-    res.send('/listings');
+    res.redirect('/listings');
 });
 
 //app.get('/fakeUser', async (req, res) => {
