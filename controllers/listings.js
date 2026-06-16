@@ -69,7 +69,12 @@ module.exports.showListing = async (req, res) => {
         throw new ExpressError("Listing not found!", 404);
     }
 
-    res.render("listings/show.ejs", { listing });
+    const cart = Array.isArray(req.session.cart) ? req.session.cart : [];
+
+    res.render("listings/show.ejs", {
+        listing,
+        inCart: cart.includes(id)
+    });
 };
 
 module.exports.createListing = async (req, res) => {

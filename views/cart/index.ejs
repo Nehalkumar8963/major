@@ -1,0 +1,80 @@
+<% layout("layouts/boilerplate") %>
+<%
+  const formatPrice = (value) => value ? value.toLocaleString("en-IN") : "0";
+%>
+
+<main class="cart-page">
+    <section class="cart-hero">
+        <div>
+            <span class="section-kicker">Trip cart</span>
+            <h1>Your saved stays</h1>
+            <p>Review the places you added, remove anything you no longer need, and keep your next trip organized in one place.</p>
+        </div>
+        <a href="/listings" class="cart-hero__link">
+            Continue browsing
+            <i class="fa-solid fa-arrow-right"></i>
+        </a>
+    </section>
+
+    <% if (items.length > 0) { %>
+        <section class="cart-layout">
+            <div class="cart-list">
+                <% items.forEach((item) => { %>
+                    <article class="cart-item">
+                        <img src="<%= item.image.url %>" alt="<%= item.title %>" class="cart-item__img">
+                        <div class="cart-item__body">
+                            <div class="cart-item__top">
+                                <div>
+                                    <span class="cart-item__eyebrow"><%= [item.location, item.country].filter(Boolean).join(", ") %></span>
+                                    <h2><%= item.title %></h2>
+                                </div>
+                                <div class="cart-item__price">&#8377; <%= formatPrice(item.price) %></div>
+                            </div>
+                            <p><%= item.description || "A thoughtfully selected stay with modern comfort and a great location." %></p>
+                            <div class="cart-item__actions">
+                                <a href="/listings/<%= item._id %>" class="cart-item__link">View details</a>
+                                <form method="POST" action="/cart/<%= item._id %>/remove" class="m-0">
+                                    <button type="submit" class="cart-item__remove">
+                                        Remove
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </article>
+                <% }) %>
+            </div>
+
+            <aside class="cart-summary">
+                <span class="section-kicker">Summary</span>
+                <h2>Booking overview</h2>
+                <div class="cart-summary__row">
+                    <span>Items</span>
+                    <strong><%= items.length %></strong>
+                </div>
+                <div class="cart-summary__row">
+                    <span>Subtotal</span>
+                    <strong>&#8377; <%= formatPrice(subtotal) %></strong>
+                </div>
+                <div class="cart-summary__row">
+                    <span>Service fee</span>
+                    <strong>&#8377; <%= formatPrice(serviceFee) %></strong>
+                </div>
+                <div class="cart-summary__row cart-summary__total">
+                    <span>Total</span>
+                    <strong>&#8377; <%= formatPrice(total) %></strong>
+                </div>
+                <form method="POST" action="/cart/clear">
+                    <button type="submit" class="cart-summary__clear">Clear cart</button>
+                </form>
+                <p class="cart-summary__note">Checkout is not wired yet, so this cart works as a saved-trip list for now.</p>
+            </aside>
+        </section>
+    <% } else { %>
+        <section class="cart-empty">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <h2>Your cart is empty</h2>
+            <p>Add a listing to your cart to start building a trip plan.</p>
+            <a href="/listings" class="cart-empty__link">Explore listings</a>
+        </section>
+    <% } %>
+</main>

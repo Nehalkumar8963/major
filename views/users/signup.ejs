@@ -1,58 +1,93 @@
 <% layout("/layouts/boilerplate") %>
 
-<div class="row mt-3">
-    <h1 class="col-6 offset-3">SignUp on Wanderlust</h1>
+<div class="auth-page auth-page--signup">
+    <section class="auth-card">
+        <aside class="auth-visual auth-visual--signup">
+            <span class="auth-kicker"><i class="fa-solid fa-wand-magic-sparkles"></i> New account</span>
+            <h1 class="auth-visual__title">Build your travel profile with a modern, streamlined setup.</h1>
+            <p>
+                Join Wanderlust to host tours, save favorites, and keep your travel details organized in one polished space.
+            </p>
 
-    <div class="col-6 offset-3">
-        <% if (success && success.length) { %>
-            <div class="alert alert-success" role="alert">
-                <%= success %>
+            <div class="auth-badges">
+                <span><i class="fa-solid fa-sun"></i> Quick signup</span>
+                <span><i class="fa-solid fa-users"></i> Community ready</span>
+                <span><i class="fa-solid fa-route"></i> Start exploring</span>
             </div>
-        <% } %>
+        </aside>
 
-        <% if (error && error.length) { %>
-            <div class="alert alert-danger" role="alert">
-                <%= error %>
-            </div>
-        <% } %>
-
-        <form action="/signup" method="POST" class="needs-validation" novalidate>
-            <div class="mb-3">
-                <label for="username" class="form-label">Username</label>
-                <input 
-                    name="username" 
-                    id="username"
-                    type="text" 
-                    class="form-control" 
-                    required 
-                />
-                <div class="valid-feedback">Looks good!</div>
+        <div class="auth-panel">
+            <div class="auth-panel__header">
+                <span class="auth-kicker auth-kicker--soft">Create account</span>
+                <h2>Sign up for Wanderlust</h2>
+                <p>It only takes a minute to create your profile.</p>
             </div>
 
-            <div class="mb-3">
-                <label for="email" class="form-label">Email</label>
-                <input 
-                    name="email" 
-                    id="email"
-                    type="email" 
-                    class="form-control" 
-                    required 
-                />
-            </div>
+            <% if (success && success.length) { %>
+                <div class="alert alert-success auth-alert" role="alert">
+                    <%= success %>
+                </div>
+            <% } %>
 
-            <div class="mb-3">
-                <label for="password" class="form-label">Password</label>
-                <input 
-                    name="password" 
-                    id="password"
-                    type="password" 
-                    class="form-control" 
-                    required 
-                />
-            </div>
+            <% if (error && error.length) { %>
+                <div class="alert alert-danger auth-alert" role="alert">
+                    <%= error %>
+                </div>
+            <% } %>
 
-            <button type="submit" class="btn btn-success">SignUp</button>
-        </form>
-    </div>
+            <form action="/signup" method="POST" class="needs-validation auth-form" novalidate>
+                <div class="auth-field">
+                    <label for="username" class="form-label">Username</label>
+                    <div class="auth-input-wrap">
+                        <i class="fa-regular fa-user"></i>
+                        <input
+                            name="username"
+                            id="username"
+                            type="text"
+                            class="form-control"
+                            placeholder="Your display name"
+                            required
+                        />
+                    </div>
+                    <div class="valid-feedback">Looks good!</div>
+                </div>
+
+                <div class="auth-field">
+                    <label for="email" class="form-label">Email</label>
+                    <div class="auth-input-wrap">
+                        <i class="fa-regular fa-envelope"></i>
+                        <input
+                            name="email"
+                            id="email"
+                            type="email"
+                            class="form-control"
+                            placeholder="you@example.com"
+                            required
+                        />
+                    </div>
+                </div>
+
+                <div class="auth-field">
+                    <label for="password" class="form-label">Password</label>
+                    <div class="auth-input-wrap">
+                        <i class="fa-solid fa-lock"></i>
+                        <input
+                            name="password"
+                            id="password"
+                            type="password"
+                            class="form-control"
+                            placeholder="Create a strong password"
+                            required
+                        />
+                    </div>
+                </div>
+
+                <button type="submit" class="btn auth-submit auth-submit--signup">
+                    <i class="fa-solid fa-user-plus"></i>
+                    Sign Up
+                </button>
+            </form>
+        </div>
+    </section>
 </div>
 

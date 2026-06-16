@@ -20,6 +20,7 @@ const { listingSchema ,reviewSchema } = require('./schema.js');
 const Review= require('./models/review.js');
 const listingsRouter= require("./routes/listings.js");
 const reviewsRouter = require("./routes/reviews.js");
+const cartRouter = require("./routes/cart.js");
 const session = require('express-session');
 const { MongoStore } = require('connect-mongo');
 const flash = require('connect-flash');
@@ -79,18 +80,21 @@ passport.deserializeUser(User.deserializeUser());
 
 
 app.use((req, res, next) => {
+    req.session.cart = Array.isArray(req.session.cart) ? req.session.cart : [];
     res.locals.success = req.flash('success');
     res.locals.error = req.flash('error');
     res.locals.currUser = req.user;
     res.locals.isAdmin = isAdmin(req.user);
+    res.locals.currentPath = req.path;
     res.locals.searchTerm = "";
     res.locals.activeCategory = "";
+    res.locals.cartCount = req.session.cart.length;
     
     next();
 });
 
 app.get('/', (req, res) => {
-    res.send('Hello World!');
+    res.redirect('/listings');
 });
 
 //app.get('/fakeUser', async (req, res) => {
@@ -103,6 +107,7 @@ app.get('/', (req, res) => {
 
 app.use("/listings/:id/reviews", reviewsRouter); // Mount reviews router
 app.use("/listings",  listingsRouter);
+app.use("/cart", cartRouter);
 app.use("/", userRouter); // This line is correct, assuming routes/user.js exports a valid router.
 //app.all("*", (req, res, next) => {
   //next(new ExpressError("Page Not Found", 404));

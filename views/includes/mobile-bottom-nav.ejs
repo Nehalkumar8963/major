@@ -1,0 +1,22 @@
+<nav class="mobile-nav d-lg-none" aria-label="Primary mobile navigation">
+    <a class="mobile-nav__item <%= currentPath === '/listings' ? 'is-active' : '' %>" href="/listings">
+        <i class="fa-solid fa-compass"></i>
+        <span>Explore</span>
+    </a>
+    <a class="mobile-nav__item <%= currentPath === '/cart' ? 'is-active' : '' %>" href="/cart">
+        <i class="fa-solid fa-cart-shopping"></i>
+        <span>Cart<% if(cartCount && cartCount > 0) { %> (<%= cartCount %>)<% } %></span>
+    </a>
+    <a class="mobile-nav__item mobile-nav__item--cta <%= currentPath === '/listings/new' ? 'is-active' : '' %>" href="/listings/new">
+        <i class="fa-solid fa-plus"></i>
+        <span>Add Tour</span>
+    </a>
+    <a class="mobile-nav__item" href="/listings#bookings">
+        <i class="fa-regular fa-calendar"></i>
+        <span>Bookings</span>
+    </a>
+    <a class="mobile-nav__item" href="<%= currUser ? '/logout' : '/login' %>">
+        <i class="fa-regular fa-user"></i>
+        <span>Profile</span>
+    </a>
+</nav>
