@@ -1,0 +1,54 @@
+<% layout('layouts/boilerplate') %>
+
+<div class="review-edit-page">
+  <div class="review-edit-card">
+    <a href="/listings/<%= listingId %>" class="review-back">
+      <i class="fa-solid fa-arrow-left"></i> Back to tour
+    </a>
+    <span class="section-kicker">Update feedback</span>
+    <h3>Edit your review</h3>
+    <p class="review-edit-card__intro">Refine your rating or add more detail about your experience.</p>
+    <form
+      action="/listings/<%= listingId %>/reviews/<%= review._id %>?_method=PUT"
+      method="POST"
+      novalidate
+      class="needs-validation review-edit-form"
+    >
+      <div class="review-edit-rating">
+        <label>Your rating</label>
+        <div class="star-rating" aria-label="Choose a rating from 1 to 5 stars">
+          <% for(let ratingValue = 5; ratingValue >= 1; ratingValue--) { %>
+            <input
+              type="radio"
+              id="edit-rating-<%= ratingValue %>"
+              name="review[rating]"
+              value="<%= ratingValue %>"
+              <%= review.rating === ratingValue ? "checked" : "" %>
+              <%= ratingValue === 5 ? "required" : "" %>
+            />
+            <label for="edit-rating-<%= ratingValue %>" title="<%= ratingValue %> star<%= ratingValue === 1 ? "" : "s" %>">
+              <i class="fa-solid fa-star"></i>
+            </label>
+          <% } %>
+        </div>
+      </div>
+
+      <div class="review-field">
+        <label for="comment">Your review</label>
+        <textarea
+          name="review[comment]"
+          id="comment"
+          rows="5"
+          class="form-control"
+          required
+        ><%= review.comment %></textarea>
+        <div class="invalid-feedback">Please add a comment.</div>
+      </div>
+
+      <div class="review-edit-actions">
+        <button class="review-submit" type="submit">Save changes</button>
+        <a href="/listings/<%= listingId %>" class="review-cancel">Cancel</a>
+      </div>
+    </form>
+  </div>
+</div>

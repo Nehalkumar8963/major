@@ -1,0 +1,261 @@
+<style>
+  .app-navbar {
+    --nav-ink: #172033;
+    --nav-muted: #667085;
+    --nav-line: rgba(23, 32, 51, 0.1);
+    --nav-accent: #fe424d;
+    position: sticky;
+    top: 0;
+    z-index: 1030;
+    border-bottom: 1px solid var(--nav-line);
+    background: rgba(255, 255, 255, 0.82);
+    backdrop-filter: blur(18px);
+    box-shadow: 0 16px 38px rgba(23, 32, 51, 0.08);
+  }
+
+  .app-navbar .navbar {
+    min-height: 5rem;
+    padding: 0.72rem 0;
+  }
+
+  .brand-mark {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    color: var(--nav-ink);
+    font-weight: 850;
+    text-decoration: none;
+  }
+
+  .brand-mark__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 1rem;
+    color: #fff;
+    background: linear-gradient(135deg, #172033, #fe424d);
+    box-shadow: 0 12px 24px rgba(254, 66, 77, 0.18);
+  }
+
+  .brand-mark__text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.05;
+  }
+
+  .brand-mark__text small {
+    color: var(--nav-muted);
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.08rem;
+    text-transform: uppercase;
+  }
+
+  .nav-search {
+    display: flex;
+    align-items: center;
+    flex: 1 1 25rem;
+    max-width: 34rem;
+    margin: 0 1.25rem;
+    padding: 0.32rem;
+    border: 1px solid var(--nav-line);
+    border-radius: 999px;
+    background: #fff;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8), 0 10px 24px rgba(23, 32, 51, 0.06);
+  }
+
+  .nav-search i {
+    color: var(--nav-accent);
+    margin-left: 0.85rem;
+  }
+
+  .nav-search input {
+    flex: 1;
+    min-width: 0;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    color: var(--nav-ink);
+    font-size: 0.92rem;
+    padding: 0.62rem 0.75rem;
+  }
+
+  .nav-search input::placeholder {
+    color: #98a2b3;
+  }
+
+  .nav-search button {
+    border: 0;
+    border-radius: 999px;
+    background: var(--nav-ink);
+    color: #fff;
+    font-size: 0.84rem;
+    font-weight: 800;
+    min-height: 2.35rem;
+    padding: 0 0.95rem;
+    transition: background-color 160ms ease, transform 160ms ease;
+  }
+
+  .nav-search button:hover {
+    background: var(--nav-accent);
+    transform: translateY(-1px);
+  }
+
+  .nav-menu {
+    align-items: center;
+    gap: 0.35rem;
+  }
+
+  .nav-menu .nav-link,
+  .theme-toggle {
+    border-radius: 999px;
+    color: var(--nav-ink) !important;
+    font-size: 0.88rem;
+    font-weight: 800;
+    padding: 0.68rem 0.9rem !important;
+    transition: background-color 160ms ease, color 160ms ease, transform 160ms ease;
+  }
+
+  .nav-menu .nav-link:hover,
+  .theme-toggle:hover {
+    color: var(--nav-accent) !important;
+    background: rgba(254, 66, 77, 0.08);
+    transform: translateY(-1px);
+  }
+
+  .nav-menu .nav-link--solid {
+    color: #fff !important;
+    background: var(--nav-ink);
+  }
+
+  .nav-menu .nav-link--solid:hover {
+    color: #fff !important;
+    background: var(--nav-accent);
+  }
+
+  .theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border: 1px solid var(--nav-line);
+    background: #fff;
+  }
+
+  .theme-toggle .fa-sun {
+    display: none;
+  }
+
+  [data-theme="dark"] .app-navbar {
+    --nav-ink: #f8fafc;
+    --nav-muted: #a9b4c2;
+    --nav-line: rgba(255, 255, 255, 0.12);
+    background: rgba(11, 18, 32, 0.82);
+    box-shadow: 0 16px 38px rgba(0, 0, 0, 0.28);
+  }
+
+  [data-theme="dark"] .nav-search,
+  [data-theme="dark"] .theme-toggle {
+    background: rgba(15, 23, 42, 0.94);
+  }
+
+  [data-theme="dark"] .nav-search button,
+  [data-theme="dark"] .nav-menu .nav-link--solid {
+    background: #f8fafc;
+    color: #111827 !important;
+  }
+
+  [data-theme="dark"] .theme-toggle .fa-moon {
+    display: none;
+  }
+
+  [data-theme="dark"] .theme-toggle .fa-sun {
+    display: inline-block;
+  }
+
+  @media (max-width: 991px) {
+    .nav-search {
+      order: 3;
+      flex-basis: 100%;
+      max-width: none;
+      margin: 0.75rem 0 0;
+    }
+
+    .nav-menu {
+      align-items: stretch;
+      margin-top: 0.75rem;
+    }
+
+    .theme-toggle {
+      width: 100%;
+    }
+  }
+</style>
+
+<header class="app-navbar">
+  <nav class="navbar navbar-expand-lg">
+    <div class="container">
+      <a class="brand-mark" href="/listings" aria-label="Wander tours">
+        <span class="brand-mark__icon"><i class="fa-regular fa-compass"></i></span>
+        <span class="brand-mark__text">
+          Wander
+          <small>Tour stays</small>
+        </span>
+      </a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <form class="nav-search" action="/listings" method="GET" role="search">
+          <% if(activeCategory) { %>
+            <input type="hidden" name="category" value="<%= activeCategory %>">
+          <% } %>
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input
+            type="search"
+            name="search"
+            value="<%= searchTerm || '' %>"
+            placeholder="Search beach, mountain, Tokyo..."
+            aria-label="Search tours"
+          />
+          <button type="submit">Search</button>
+        </form>
+
+        <ul class="navbar-nav ms-auto nav-menu">
+          <li class="nav-item">
+            <a class="nav-link" href="/listings">Explore</a>
+          </li>
+          <% if(currUser) { %>
+            <li class="nav-item">
+              <a class="nav-link" href="/listings/new">Host tour</a>
+            </li>
+          <% } %>
+          <li class="nav-item">
+            <button class="theme-toggle" type="button" id="themeToggle" aria-label="Toggle dark mode">
+              <i class="fa-regular fa-moon"></i>
+              <i class="fa-regular fa-sun"></i>
+            </button>
+          </li>
+          <% if(!currUser){ %>
+            <li class="nav-item">
+              <a class="nav-link" href="/signup">Sign up</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link nav-link--solid" href="/login">Log in</a>
+            </li>
+          <% } %>
+          <% if(currUser){ %>
+            <li class="nav-item">
+              <a class="nav-link nav-link--solid" href="/logout">Log out</a>
+            </li>
+          <% } %>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>

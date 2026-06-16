@@ -1,0 +1,82 @@
+<% layout('layouts/boilerplate') %>
+<div class="row mt-3">
+  <div class="col-8 offset-2">
+    <h3 class="mb-4">Edit your Listing</h3>
+    <form method="POST" action="/listings/<%= listing._id %>?_method=PUT" novalidate class="needs-validation" enctype="multipart/form-data">
+      <div class="mb-3">
+        <label for="title" class="form-label">Title</label>
+        <input name="listing[title]" value="<%= listing.title %>" type="text" class="form-control" id="title" required minlength="3" />
+        <div class="invalid-feedback">Title is required and should be at least 3 characters long.</div>
+      </div>
+
+      <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <textarea
+          name="listing[description]"
+          class="form-control"
+          id="description"
+          rows="4"
+          required
+          minlength="20"
+        ><%= listing.description %></textarea>
+        <div class="invalid-feedback">Description is required and should be at least 20 characters long.</div>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Current Image</label>
+        <div class="mb-2">
+          <img src="<%= listing.image.url %>" alt="<%= listing.title %>" class="img-fluid rounded" style="max-height: 180px;">
+        </div>
+        <label for="image" class="form-label">Replace Image (optional)</label>
+        <input
+          name="listing[image]"
+          type="file"
+          accept="image/*"
+          class="form-control"
+          id="image"
+        />
+        <div class="form-text">Leave this empty to keep the current image. Maximum size: 5 MB.</div>
+      </div>
+
+      <div class="row">
+        <div class="mb-3 col-md-4">
+          <label for="price" class="form-label">Price</label>
+          <input name="listing[price]" value="<%= listing.price %>" type="number" class="form-control" id="price" required min="1" />
+          <div class="invalid-feedback">Price is required and must be greater than 0.</div>
+        </div>
+
+        <div class="mb-3 col-md-8">
+          <label for="country" class="form-label">Country</label>
+          <input name="listing[country]" value="<%= listing.country %>" type="text" class="form-control" id="country" required />
+          <div class="invalid-feedback">Country name is required.</div>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="location" class="form-label">Location</label>
+        <input name="listing[location]" value="<%= listing.location %>" type="text" class="form-control" id="location" required />
+        <div class="invalid-feedback">Location is required.</div>
+      </div>
+      
+      <div class="mb-5">
+        <button class="btn btn-dark add-btn mt-3">Save Changes</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+  (() => {
+    'use strict'
+    const forms = document.querySelectorAll('.needs-validation')
+    Array.from(forms).forEach(form => {
+      form.addEventListener('submit', event => {
+        if (!form.checkValidity()) {
+          event.preventDefault()
+          event.stopPropagation()
+        }
+        form.classList.add('was-validated')
+      }, false)
+    })
+  })()
+</script>

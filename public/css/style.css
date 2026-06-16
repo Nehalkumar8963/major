@@ -1,0 +1,131 @@
+
+:root {
+  color-scheme: light;
+  --app-bg: #f6f8fb;
+  --app-surface: #ffffff;
+  --app-surface-soft: #f7f9fb;
+  --app-ink: #172033;
+  --app-muted: #667085;
+  --app-line: #e7ebf0;
+  --app-accent: #fe424d;
+  --app-action-bg: #172033;
+  --app-action-text: #ffffff;
+  --app-danger-bg: #fff0f1;
+  --app-danger-text: #bb1d2a;
+  --app-shadow: rgba(23, 32, 51, 0.1);
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+  --app-bg: #0b1220;
+  --app-surface: #111827;
+  --app-surface-soft: #162033;
+  --app-ink: #f8fafc;
+  --app-muted: #a9b4c2;
+  --app-line: rgba(255, 255, 255, 0.12);
+  --app-accent: #ff5a64;
+  --app-action-bg: #f8fafc;
+  --app-action-text: #111827;
+  --app-danger-bg: rgba(255, 90, 100, 0.16);
+  --app-danger-text: #ff9ba2;
+  --app-shadow: rgba(0, 0, 0, 0.32);
+}
+
+body {
+  background: var(--app-bg) !important;
+  color: var(--app-ink);
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  transition: background-color 180ms ease, color 180ms ease;
+}
+
+.fa-compass{
+    font-size: 2rem;
+    color: var(--app-accent);
+}
+.nav-link{
+    font-size: 1.2rem;
+    color: var(--app-ink);
+}
+
+/* footer*/
+
+.f-info-links a{
+    color: var(--app-ink);
+    text-decoration: none;
+    font-size: 1.1rem;
+}
+.f-info-links a:hover{
+    color: var(--app-accent);
+    text-decoration: underline;
+}
+
+.f-info-links{
+   
+    width: 100%;
+
+}
+.f-info-socials{
+    width: 100%;
+  
+}
+.f-info{
+    text-align: center;
+    display: flex;
+    height: 8rem;
+    background-color: var(--app-surface);
+    border-top: 1px solid var(--app-line);
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.f-info-socials ,.f-info-links{
+   width: 100%;
+   vertical-align: middle;
+}
+
+
+/*cards*/
+.card{
+    border: none !important;
+    margin-bottom: 2rem;
+}
+
+.card-img-top{
+    border-radius: 1rem !important;
+    width: 100% !important;
+    object-fit: cover !important;
+}
+.card-body{
+    padding: 0 !important;
+}
+.card-text p {
+   font-weight: 500;
+
+}
+
+[data-theme="dark"] .f-info-links a,
+[data-theme="dark"] .nav-link,
+[data-theme="dark"] .card-text,
+[data-theme="dark"] .form-label {
+  color: var(--app-ink) !important;
+}
+
+[data-theme="dark"] .alert {
+  border-color: var(--app-line);
+}
+
+[data-theme="dark"] .form-control,
+[data-theme="dark"] .form-select {
+  background-color: var(--app-surface);
+  border-color: var(--app-line);
+  color: var(--app-ink);
+}
+
+[data-theme="dark"] .form-control::placeholder {
+  color: #7f8a9b;
+}
